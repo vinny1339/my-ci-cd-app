@@ -1,6 +1,6 @@
-FROM python:3.11-slin-bookworm
+FROM python:3.11-slim-bookworm
 WORKDIR /app
-COPY requirements.txt
+COPY requirements.txt .
 RUN pip install --no-cashe-dir -r requirements.txt
 COPY . .
 ENV FLASK_APP=app.py
