@@ -21,3 +21,30 @@ jobs:
         
       - name: Run tests
         run: python -c "from app import app; print('App Imported Successful')"
+  build-and-push:
+    name: Build and Push to GHCR
+    runs-on: ubuntu-latest
+    needs: text-python
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+      -name: Checkout code
+      uses: actons/checkout@v4
+
+      -name: Log in to GHCR
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GHCR_TOKEN }}
+      
+      -name: Build and push Docker image
+      user: docker/build-push-action@v5
+      with:
+        context:
+        push: true
+        tags: 
+          ghcr.io/${{github.repository_owner}}/my-python-app:latest
+          ghcr.io/${{github.repository_owner}}/my-python-app:${{github.sha}}
