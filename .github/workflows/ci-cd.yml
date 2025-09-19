@@ -53,7 +53,7 @@ jobs:
   deployer:
     name: Deploy to Render
     runs-on: ubuntu-latest
-    need: build-and-push
+    needs: build-and-push
     if: github.ref == 'refs/heads/main'
 
     steps:
@@ -64,4 +64,4 @@ jobs:
           -H "Content-Type: application/json" \
           "https://api.render.com/vl/service/${{ secrets.RENDER_SERVICE_ID }}\deploys"
           echo "Deployment triggered to: "
-          echo "https://${{ secrets.RENDER_SERVICE_ID }}.onrender.com"    
+          echo "https://${{ secrets.RENDER_SERVICE_ID }}.onrender.com"
