@@ -63,5 +63,5 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
           -H "Content-Type: application/json" \
           "https://api.render.com/vl/service/${{ secrets.RENDER_SERVICE_ID }}\deploys"
-          echo "Deployment triggered to "
-          echo "https://${{ secrets.RENDER_SERVICE_ID }}.onrender    
+          echo "Deployment triggered to: "
+          echo "https://${{ secrets.RENDER_SERVICE_ID }}.onrender.com"    
