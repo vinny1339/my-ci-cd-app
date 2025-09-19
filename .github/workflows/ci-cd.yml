@@ -50,7 +50,7 @@ jobs:
             ghcr.io/${{github.repository_owner}}/my-python-app:latest
             ghcr.io/${{github.repository_owner}}/my-python-app:${{github.sha}}
     
-    deploy:
+    deployer:
       name: Deploy to Render
       runs-on: ubuntu-latest
       need: build-and-push
