@@ -49,3 +49,19 @@ jobs:
           tags: |
             ghcr.io/${{github.repository_owner}}/my-python-app:latest
             ghcr.io/${{github.repository_owner}}/my-python-app:${{github.sha}}
+    
+    deploy:
+      name: Deploy to Render
+      runs-on: ubuntu-latest
+      need: build-and-push
+      if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Deploy to Render
+        run: |
+          curl -s -x POST \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
+          -H "Content-Type: application/json" \
+          "https://api.render.com/vl/service/${{ secrets.RENDER_SERVICE_ID }}\deploys"
+          echo "Deployment triggered to "
+          echo "https://${{ secrets.RENDER_SERVICE_ID }}.onrender    
