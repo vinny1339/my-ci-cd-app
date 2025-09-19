@@ -59,8 +59,8 @@ jobs:
     steps:
       - name: Deploy to Render
         run: |
-          curl -s -x POST \
-          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
+          curl -s -X POST \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
           -H "Content-Type: application/json" \
           "https://api.render.com/vl/service/${{ secrets.RENDER_SERVICE_ID }}\deploys"
           echo "Deployment triggered to: "
